@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Clara Zimmermann</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: one scrolling page, five entries (accueil, à propos, parcours, expériences, contact).
+   Bands alternate paper and mist, joined by two-tone psychedelic waves. Photos are polaroids,
+   notes are lilac post-its, titles sit on striped tape. */
+:root {
+  --paper: #F0F0EB; --ink: #2A2342; --violet: #8177AB; --lilac: #A99CDB; --mist: #C9C0EC;
+  --bg: #F0F0EB; --band: #E7E4F3; --fg: #2A2342; --muted: #5E5488; --script: #6F659B;
+  --line: #8177AB; --card: #F8F7F2; --accent: #8177AB;
+  --wave-a: #DDD8F1; --wave-b: #CFC8EC; --shadow: rgba(42, 35, 66, .18);
+  --tape-a: #C9C0EC; --tape-b: #D9D2F2; --tape-ink: #2A2342;
+  --polaroid: #FBFBF8; --polaroid-ink: #2A2342; --postit: #A99CDB; --postit-ink: #2A2342;
+  --font-title: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-script: "Caveat", "Segoe Script", cursive;
+  --font-body: "DM Sans", Helvetica, Arial, sans-serif;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1060px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 56px; position: relative; }
+section { scroll-margin-top: 96px; }
+
+/* type */
+.title { font-family: var(--font-title); font-weight: 400; text-transform: uppercase; letter-spacing: .03em; line-height: .95; text-wrap: balance; }
+.script { font-family: var(--font-script); font-weight: 700; color: var(--script); line-height: 1.1; }
+.eyebrow { font-family: var(--font-title); letter-spacing: .12em; font-size: 18px; color: var(--muted); text-transform: uppercase; }
+.meta { font-size: 14px; color: var(--muted); letter-spacing: .02em; }
+h2.title { font-size: clamp(44px, 9vw, 72px); }
+.head { display: grid; gap: 4px; margin-bottom: 32px; }
+.head .script { font-size: clamp(26px, 5vw, 34px); }
+
+
+/* logo du header (ancien bandeau de l'accueil) */
+.logo { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 0; text-decoration: none; color: var(--tape-ink); }
+.logo .tape { padding: 6px 22px 5px; transform: rotate(-2deg); }
+.logo .tape .title { font-size: clamp(22px, 5.6vw, 30px); letter-spacing: .05em; }
+.logo .sign-mini { display: flex; align-items: center; gap: 6px; font-family: var(--font-script); font-weight: 700; font-size: 22px; color: var(--script); line-height: 1; margin: 2px 0 0 34px; }
+.logo .sign-mini svg { width: 16px; height: 16px; fill: var(--violet); }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.hero p.lead { margin-top: 0; font-size: 21px; }
+
+/* header */
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1.5px solid var(--line); }
+header.top .wrap { padding-block: 8px; display: flex; align-items: center; gap: 14px; }
+.mono { flex: none; width: 46px; height: 46px; display: grid; place-items: center; background: var(--paper); color: var(--violet); font-family: var(--font-title); font-size: 24px; letter-spacing: .02em; border-radius: 52% 48% 50% 50% / 50% 52% 48% 50%; text-decoration: none; }
+nav.menu { min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+nav.menu ul { display: flex; gap: 18px; width: max-content; margin-left: auto; white-space: nowrap; }
+nav.menu a { font-family: var(--font-title); font-size: 20px; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; padding: 8px 0; display: inline-block; border-bottom: 2px solid transparent; }
+nav.menu a:hover { border-bottom-color: var(--accent); }
+
+/* hero */
+.hero { overflow: hidden; }
+.hero-waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero .wrap { z-index: 1; padding-block: 48px 40px; }
+.tape { display: inline-block; position: relative; transform: rotate(-2.5deg); color: var(--tape-ink); padding: 16px 44px 14px;
+  background: repeating-linear-gradient(135deg, var(--tape-a) 0 14px, var(--tape-b) 14px 28px);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 12%, 100% 25%, calc(100% - 8px) 37%, 100% 50%, calc(100% - 8px) 62%, 100% 75%, calc(100% - 8px) 87%, 100% 100%, 0 100%, 8px 87%, 0 75%, 8px 62%, 0 50%, 8px 37%, 0 25%, 8px 12%); }
+.tape .title { font-size: clamp(36px, 10.5vw, 88px); letter-spacing: .05em; white-space: nowrap; }
+.sign { display: flex; align-items: center; gap: 10px; margin: 6px 0 0 min(36vw, 340px); font-family: var(--font-script); font-weight: 700; font-size: clamp(28px, 6vw, 40px); color: var(--script); }
+.sign svg { width: 26px; height: 26px; flex: none; }
+.wavy-underline { display: block; width: 180px; height: 12px; margin: -4px 0 0 min(36vw, 340px); }
+.hero h1 { font-size: clamp(64px, 15vw, 150px); margin-top: 40px; }
+.hero .script.big { font-size: clamp(34px, 7vw, 52px); margin-top: 4px; }
+.hero p.lead { max-width: 52ch; margin-top: 22px; }
+.postit { position: relative; background: var(--postit); color: var(--postit-ink); padding: 18px 20px 16px; box-shadow: 0 8px 16px var(--shadow); transform: rotate(var(--r, 1.5deg)); max-width: 340px; font-size: 16px; }
+.postit .clip { position: absolute; top: -12px; left: 22px; width: 18px; height: 40px; }
+.postit strong { font-weight: 700; }
+.hero .postit { margin-top: 30px; }
+
+/* polaroids */
+.polaroids { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 34px 28px; margin-top: 8px; }
+.polaroid { position: relative; background: var(--polaroid); color: var(--polaroid-ink); padding: 12px 12px 18px; border-radius: 2px; box-shadow: 0 10px 22px var(--shadow); transform: rotate(var(--r, -1.5deg)); transition: transform .2s ease; text-decoration: none; display: block; min-width: 0; }
+a.polaroid:hover, .polaroid:hover { transform: rotate(0deg) translateY(-3px); }
+.polaroid::before { content: ""; position: absolute; top: -13px; left: 50%; width: 92px; height: 26px; transform: translateX(-50%) rotate(-3deg); background: repeating-linear-gradient(135deg, rgba(201, 192, 236, .85) 0 10px, rgba(221, 216, 242, .85) 10px 20px); }
+.ph { aspect-ratio: 1 / 1; max-width: 100%; display: grid; place-items: center; text-align: center; padding: 14px; background: radial-gradient(circle at 30% 25%, #DCD6F5 0, #B9AEE4 60%, #A99CDB 100%); color: var(--ink); position: relative; overflow: hidden; }
+.ph.photo { display: block; padding: 0; background: #DCD6F5; }
+.ph.tall { aspect-ratio: 3 / 4; }
+.ph img, .ph video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph svg.star { width: 40px; height: 40px; margin: 0 auto 6px; }
+.ph span { font-size: 14px; font-weight: 500; }
+.polaroid .cap { font-family: var(--font-script); font-weight: 700; font-size: 26px; line-height: 1.1; margin-top: 12px; color: #5E5488; }
+.polaroid .sub { font-size: 14px; line-height: 1.4; margin-top: 6px; color: #4A416E; }
+
+/* bands */
+.band { background: var(--band); }
+.divider { display: block; width: 100%; height: 44px; margin-bottom: -1px; }
+.divider.flip { transform: scaleY(-1); margin: -1px 0 0; }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 44px; align-items: start; }
+.about p + p { margin-top: 14px; }
+.about .text { max-width: 62ch; }
+.scotch { position: relative; margin-top: 26px; padding: 22px 24px; border: 2px solid var(--line); background: var(--card); }
+.scotch::before, .scotch::after { content: ""; position: absolute; width: 74px; height: 22px; background: repeating-linear-gradient(135deg, rgba(201, 192, 236, .9) 0 10px, rgba(221, 216, 242, .9) 10px 20px); }
+.scotch::before { top: -12px; left: -14px; transform: rotate(-35deg); }
+.scotch::after { bottom: -12px; right: -14px; transform: rotate(-35deg); }
+.scotch .eyebrow { display: block; margin-bottom: 4px; }
+.scotch p { font-size: 20px; font-weight: 500; line-height: 1.4; }
+.keywords { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 30px; margin-top: 38px; }
+.postit h3 { font-family: var(--font-title); font-weight: 400; letter-spacing: .08em; font-size: 22px; margin-bottom: 8px; }
+.postit li { padding: 2px 0; }
+.postit li::before { content: "✦"; margin-right: 8px; font-size: 12px; }
+.postit.wide { max-width: none; }
+
+/* timeline */
+.timeline { position: relative; display: grid; gap: 36px; padding-left: 40px; max-width: 760px; }
+.timeline::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 0; border-left: 3px dotted var(--line); }
+.step { position: relative; min-width: 0; }
+.step svg.pin { position: absolute; left: -40px; top: 6px; width: 24px; height: 24px; }
+.step .when { display: inline-block; font-family: var(--font-title); letter-spacing: .1em; font-size: 20px; color: var(--tape-ink); background: repeating-linear-gradient(135deg, var(--tape-a) 0 10px, var(--tape-b) 10px 20px); padding: 2px 14px; transform: rotate(-1.5deg); }
+.step h3 { font-size: clamp(28px, 5.4vw, 38px); margin-top: 10px; }
+.step p { margin-top: 6px; }
+.step .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { font-size: 14px; font-weight: 500; padding: 3px 12px; border: 1.5px solid var(--line); background: var(--card); }
+
+/* experiences */
+.sub-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 22px; }
+.sub-head h3 { font-size: clamp(34px, 6.5vw, 48px); }
+.sub-head .script { font-size: 28px; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 40px; align-items: start; }
+.role h4 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 30px; letter-spacing: .04em; text-transform: uppercase; }
+.role .meta { margin-top: 2px; }
+.role ul { margin-top: 14px; display: grid; gap: 8px; }
+.role li { padding-left: 24px; position: relative; max-width: 60ch; }
+.role li::before { content: "✦"; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 14px; }
+.events { margin-top: 44px; }
+.events .eyebrow { margin-bottom: 18px; display: block; }
+.volunteer { margin-top: 72px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 34px 26px; }
+.card { position: relative; border: 1.5px solid var(--line); background: var(--card); padding: 30px 24px 24px; min-width: 0; }
+.card::before { content: ""; position: absolute; top: -13px; left: 28px; width: 88px; height: 24px; transform: rotate(-2deg); background: repeating-linear-gradient(135deg, var(--tape-a) 0 10px, var(--tape-b) 10px 20px); }
+.card h4 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 30px; letter-spacing: .04em; text-transform: uppercase; line-height: 1; }
+.card .meta { margin-top: 6px; }
+.card ul { margin-top: 14px; display: grid; gap: 8px; font-size: 16px; }
+.card li { padding-left: 22px; position: relative; }
+.card li::before { content: "✦"; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 13px; }
+.todo { margin-top: 14px; font-size: 15px; background: var(--postit); color: var(--postit-ink); padding: 10px 14px; transform: rotate(-1deg); }
+
+/* contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 44px; align-items: center; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+.mail code { font-family: var(--font-body); font-size: clamp(16px, 4.2vw, 21px); font-weight: 700; word-break: break-all; border-bottom: 3px solid var(--lilac); }
+.btn { font-family: var(--font-title); font-size: 20px; letter-spacing: .1em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: 0; padding: 10px 22px 8px; cursor: pointer; box-shadow: 4px 4px 0 var(--lilac); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--lilac); }
+#copied { font-size: 14px; color: var(--muted); min-height: 1.4em; margin-top: 8px; }
+.seek { font-size: 20px; max-width: 34ch; margin-top: 18px; font-weight: 500; line-height: 1.4; }
+
+footer.foot { background: var(--violet); color: var(--paper); }
+footer.foot .wrap { padding-block: 40px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 24px; }
+footer.foot .title { font-size: clamp(34px, 8vw, 54px); color: var(--paper); }
+footer.foot .title span { font-family: var(--font-script); font-weight: 700; text-transform: none; color: var(--mist); font-size: .8em; margin-left: 8px; }
+footer.foot small { font-size: 14px; color: var(--paper); }
+footer.foot .title, footer.foot small { text-shadow: 0 1px 0 rgba(42, 35, 66, .25); }
+
+@media (max-width: 760px) {
+  .wrap { padding-block: 44px; }
+  .about, .stage, .contact { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .about .polaroid-wrap { max-width: 320px; }
+  .sign, .wavy-underline { margin-left: 8px; }
+  .timeline { padding-left: 34px; }
+  .step svg.pin { left: -34px; }
+  .timeline::before { left: 8px; }
+}
+</style>
+<style>:root{color-scheme:light}body{margin:0}img,video{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 0 L14.6 9.4 L24 12 L14.6 14.6 L12 24 L9.4 14.6 L0 12 L9.4 9.4 Z"/></symbol>
+    <symbol id="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0 30 Q75 0 150 30 T300 30 T450 30 T600 30 T750 30 T900 30 T1050 30 T1200 30 V60 H0 Z"/></symbol>
+    <symbol id="clip" viewBox="0 0 18 40"><path d="M5 38 V8 a4 4 0 0 1 8 0 V32" fill="none" stroke="#8177AB" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="Clara Zimmermann, portfolio, retour à l'accueil">
+      <span class="tape"><span class="title">Clara Zimmermann</span></span>
+      <span class="sign-mini" aria-hidden="true">portfolio <svg viewBox="0 0 24 24"><use href="#star"/></svg></span>
+    </a>
+    <nav class="menu" aria-label="Menu principal">
+      <ul>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#experiences">Expériences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ACCUEIL -->
+<section id="accueil" class="hero">
+  <h1 class="sr-only">Clara Zimmermann, portfolio</h1>
+</section>
+
+<!-- À PROPOS -->
+<section id="a-propos" class="band">
+  <div class="wrap">
+    <div class="head">
+      <span class="script">un peu de moi</span>
+      <h2 class="title">À propos</h2>
+    </div>
+    <div class="about">
+      <div class="polaroid-wrap">
+        <div class="polaroid" style="--r: -2.5deg">
+          <div class="ph photo"><img src="media/portrait-clara.jpg" alt="Portrait en noir et blanc de Clara, souriante, lunettes sur le nez" width="900" height="900"></div>
+          <div class="cap">Clara, 20 ans</div>
+          <div class="sub">Faulquemont, Moselle</div>
+        </div>
+      </div>
+      <div class="text">
+        <p>J'ai 20 ans et j'habite à Faulquemont, en Moselle. Après un bac général au lycée Charles Jully de Saint-Avold, avec les spécialités HGGSP et mathématiques, j'ai commencé un BTS CJN au CNED. Je prépare aujourd'hui le DEUST Webmaster et Métiers de l'internet à l'Université de Limoges, 100 % à distance.</p>
+        <p>Je me forme aussi sur le terrain : community management, photo, vidéo, accueil de la presse lors d'un événement à Metz.</p>
+        <p><strong>Ce qui me motive.</strong> Mettre une idée en images, la publier au bon moment, puis lire les statistiques pour faire mieux la fois suivante.</p>
+        <div class="scotch">
+          <span class="eyebrow">Mon objectif</span>
+          <p>Décrocher un stage d'assistante communication digitale, du 5 avril au 6 juin 2027.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="keywords">
+      <div class="postit wide" style="--r: -1deg">
+        <svg class="clip"><use href="#clip"/></svg>
+        <h3>Mes outils</h3>
+        <ul>
+          <li>Canva</li><li>WordPress et Wix</li><li>Office 365</li><li>HTML, CSS, JavaScript</li><li>CapCut et Edit</li><li>Suite Adobe</li>
+        </ul>
+      </div>
+      <div class="postit wide" style="--r: 1.2deg">
+        <svg class="clip"><use href="#clip"/></svg>
+        <h3>Mes qualités</h3>
+        <ul>
+          <li>Autonome</li><li>Capacité d'adaptation</li><li>Organisée</li><li>Esprit d'équipe</li><li>Empathique</li><li>Polyvalente</li>
+        </ul>
+      </div>
+      <div class="postit wide" style="--r: -.6deg">
+        <svg class="clip"><use href="#clip"/></svg>
+        <h3>Hors écran</h3>
+        <ul>
+          <li>Littérature</li><li>Réseaux sociaux</li><li>Voyage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="divider flip" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+  <use href="#wave" style="fill: var(--wave-b)" transform="translate(0 8)"/>
+  <use href="#wave" style="fill: var(--band)"/>
+</svg>
+
+<!-- MES PROJETS -->
+<section id="projets">
+  <div class="wrap">
+    <div class="head">
+      <span class="script">mes projets</span>
+      <h2 class="title">Trois choses à voir</h2>
+    </div>
+    <div class="polaroids">
+      <a class="polaroid" href="#stage" style="--r: -2deg">
+        <div class="ph photo"><img src="media/camera-concert.jpg" alt="Caméra sur trépied filmant un concert sous des lumières violettes" width="900" height="900"></div>
+        <div class="cap">stage 1ère année</div>
+        <div class="sub"><strong>Community manager, photo et vidéo.</strong> Stage, mai à juin 2026.</div>
+      </a>
+      <a class="polaroid" href="#benevolat" style="--r: 1.5deg">
+        <div class="ph photo"><img src="media/salle-presse.jpg" alt="Salle de presse avec tables, chaises et écran Léon XIV, le Pape en France" width="900" height="900"></div>
+        <div class="cap">ma dernière expérience</div>
+        <div class="sub"><strong>Accueil de 15 journalistes à Metz.</strong> Bénévolat, septembre 2026.</div>
+      </a>
+      <a class="polaroid" href="#benevolat" style="--r: -1deg">
+        <div class="ph photo" style="background: #fff"><img src="media/stagey-logo.jpg" alt="Logo de Stagey, une étoile bleue à cinq branches sur fond blanc" width="800" height="800"></div>
+        <div class="cap">engagement associatif</div>
+        <div class="sub"><strong>L'Instagram de Stagey.</strong> Bénévolat, depuis août 2025.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<svg class="divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+  <use href="#wave" style="fill: var(--wave-b)" transform="translate(0 8)"/>
+  <use href="#wave" style="fill: var(--band)"/>
+</svg>
+
+<!-- PARCOURS -->
+<section id="parcours" class="band">
+  <div class="wrap">
+    <div class="head">
+      <span class="script">d'où je viens</span>
+      <h2 class="title">Parcours</h2>
+    </div>
+    <ol class="timeline">
+      <li class="step">
+        <svg class="pin" viewBox="0 0 24 24" style="fill: var(--violet)"><use href="#star"/></svg>
+        <span class="when">Sept. 2025 · juin 2027</span>
+        <h3 class="title">DEUST Webmaster et Métiers de l'internet</h3>
+        <p>Université de Limoges, formation 100 % à distance.</p>      </li>
+      <li class="step">
+        <svg class="pin" viewBox="0 0 24 24" style="fill: var(--violet)"><use href="#star"/></svg>
+        <span class="when">Juin 2025</span>
+        <h3 class="title">1ère année de BTS CJN</h3>
+        <p>Centre National d'Enseignement à Distance.</p>
+      </li>
+      <li class="step">
+        <svg class="pin" viewBox="0 0 24 24" style="fill: var(--violet)"><use href="#star"/></svg>
+        <span class="when">Juin 2024</span>
+        <h3 class="title">Baccalauréat général</h3>
+        <p>Lycée Charles Jully, Saint-Avold. Spécialités HGGSP et mathématiques, certification PIX.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<svg class="divider flip" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+  <use href="#wave" style="fill: var(--wave-b)" transform="translate(0 8)"/>
+  <use href="#wave" style="fill: var(--band)"/>
+</svg>
+
+<!-- EXPÉRIENCES -->
+<section id="experiences">
+  <div class="wrap">
+    <div class="head">
+      <span class="script">sur le terrain</span>
+      <h2 class="title">Expériences</h2>
+    </div>
+
+    <div id="stage">
+      <div class="sub-head"><h3 class="title">Stage de 1ère année</h3></div>
+      <div class="stage">
+        <div class="role">
+          <h4>Community manager, photographe et vidéaste</h4>
+          <p class="meta">Emma Rochefeuille · stage · mai à juin 2026</p>
+          <ul>
+            <li>Planification du contenu et gestion du temps entre prise de vue, montage et publication.</li>
+            <li>Respect des délais, en autonomie.</li>
+            <li>Adaptation rapide aux outils, aux formats et aux exigences propres à chaque projet.</li>
+          </ul>
+        </div>
+        <div class="polaroid" style="--r: 2deg">
+          <div class="ph photo"><img src="media/interview.jpg" alt="Deux personnes en pleine interview sur un canapé, entourées de boules à facettes" width="900" height="900" loading="lazy"></div>
+          <div class="cap">en interview</div>
+        </div>
+      </div>
+
+      <div class="events">
+        <span class="eyebrow">Trois événements couverts</span>
+        <div class="polaroids">
+          <div class="polaroid" style="--r: -1.5deg">
+            <div class="ph photo"><img src="media/pride-scene.jpg" alt="Groupe sur scène avec des drapeaux arc-en-ciel et progress pride accrochés aux micros" width="900" height="900" loading="lazy"></div>
+            <div class="cap">After-pride de Nancy</div>
+          </div>
+          <div class="polaroid" style="--r: 1.2deg">
+            <div class="ph photo"><img src="media/concert-scene.jpg" alt="Artiste en robe de tulle rouge au micro sur une grande scène" width="900" height="900" loading="lazy"></div>
+            <div class="cap">Concerts</div>
+          </div>
+          <div class="polaroid" style="--r: -.8deg">
+            <div class="ph photo"><img src="media/francofolies-lettres.jpg" alt="Grandes lettres en bois FRANCOFOLIES posées sur une pelouse" width="900" height="900" loading="lazy"></div>
+            <div class="cap">Francofolies 2026</div>
+          </div>
+          <div class="polaroid" style="--r: 1.5deg">
+            <div class="ph photo tall"><video controls playsinline preload="metadata" poster="media/francofolies-fjords-poster.jpg" src="media/francofolies-fjords.mp4" aria-label="Vidéo : panneau Bienvenue aux Fjords aux Francofolies"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="benevolat" class="volunteer">
+      <div class="sub-head"><h3 class="title">Bénévolat</h3><span class="script">trois missions</span></div>
+      <div class="cards">
+        <article class="card">
+          <h4>Stagey</h4>
+          <p class="meta">Community manager · août 2025 à aujourd'hui</p>
+          <ul>
+            <li>Création, planification et publication de contenus adaptés au public cible.</li>
+            <li>Animation de la communauté : réponses aux commentaires.</li>
+            <li>Analyse des statistiques Instagram, veille sur les tendances et les bonnes pratiques du réseau.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Assistante presse, accueil du Pape à Metz</h4>
+          <p class="meta">Bénévole · septembre 2026 · Metz</p>
+          <ul>
+            <li>Gestion des accréditations de 15 journalistes : presse nationale, régionale, internationale, TV et radio.</li>
+            <li>Accueil et accompagnement des médias sur site, avec les équipes de sécurité et de logistique.</li>
+            <li>Gestion de situations imprévues.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Les CNEDiens</h4>
+          <p class="meta">Community manager · septembre 2024 à août 2025</p>
+          <ul>
+            <li>Création, planification et publication de contenus adaptés au public cible.</li>
+            <li>Animation de la communauté : réponses aux commentaires.</li>
+            <li>Analyse des statistiques Instagram, veille sur les tendances et les bonnes pratiques du réseau.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+  <use href="#wave" style="fill: var(--wave-b)" transform="translate(0 8)"/>
+  <use href="#wave" style="fill: var(--band)"/>
+</svg>
+
+<!-- CONTACT -->
+<section id="contact" class="band">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="title">Contact</h2>
+    </div>
+    <div class="contact">
+      <div>
+        <div class="mail">
+          <code id="mail">clara.zimmermann@etu.unilim.fr</code>
+          <button class="btn" id="copy" type="button">Copier</button>
+        </div>
+        <p id="copied" role="status"></p>
+        <p class="meta" style="margin-top: 10px;">CV et lettre de motivation disponibles sur demande.</p>
+      </div>
+      <div class="postit" style="--r: 2deg">
+        <svg class="clip"><use href="#clip"/></svg>
+        <h3 class="title" style="font-size: 26px; margin-bottom: 6px;">Basée en Moselle</h3>
+        <p>J'habite à une trentaine de kilomètres de Metz, où j'ai déjà réalisé des prestations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="title">Clara <span>Zimmermann</span></div>
+    <small>Portfolio · 2026</small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy');
+  var out = document.getElementById('copied');
+  var mail = document.getElementById('mail');
+  btn.addEventListener('click', function () {
+    var text = mail.textContent.trim();
+    function fallback() {
+      var r = document.createRange();
+      r.selectNodeContents(mail);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      out.textContent = 'Adresse sélectionnée, copie-la avec ton clavier.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { out.textContent = 'Adresse copiée.'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>

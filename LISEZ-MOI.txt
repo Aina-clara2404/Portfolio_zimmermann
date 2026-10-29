@@ -1,0 +1,14 @@
+PORTFOLIO CLARA ZIMMERMANN
+
+Ouvrir : double-clic sur index.html (s'ouvre dans le navigateur).
+
+Modifier les textes : ouvrir index.html avec un éditeur de texte
+(Visual Studio Code, Notepad++, Sublime Text ou Bloc-notes) et changer le texte entre les balises.
+
+Remplacer une photo : mettre ta nouvelle image dans le dossier "media"
+avec EXACTEMENT le même nom que l'ancienne (ex. portrait-clara.jpg).
+Format conseillé : JPG carré, environ 900 x 900 px.
+
+Couleurs et polices : tout en haut du fichier, dans la partie ":root".
+
+Garde le dossier "media" à côté de index.html, sinon les images ne s'affichent plus.
